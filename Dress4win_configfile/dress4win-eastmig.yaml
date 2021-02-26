@@ -1,0 +1,15 @@
+resources:
+- name: dress4win-eastmig
+  type: compute.v1.instanceGroupManagers
+  properties:
+    baseInstanceName: dress4wineast
+    instanceTemplate: projects/group2-implementation/global/instanceTemplates/dress4win-template-2
+    targetSize: 1
+    zone: us-east1-b
+- name: dress4win-east
+  type: compute.v1.autoscaler
+  properties:
+    zone: us-east1-b
+    target: $(ref.dress4win-eastmig.selfLink)
+    autoscalingPolicy:
+      maxNumReplicas: 5
